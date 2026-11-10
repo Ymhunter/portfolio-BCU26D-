@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -32,6 +36,25 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
 }
 
 a {
@@ -61,9 +84,13 @@ a:focus-visible {
 
 .skip-link:focus {
   top: var(--space-m);
+  color: #ffffff;
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,4 +118,238 @@ a:focus-visible {
 .site-header nav a {
   text-decoration: none;
   font-weight: 500;
+  padding: var(--space-s);
+}
+
+main {
+  display: grid;
+  gap: var(--space-l);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-l) var(--space-m);
+}
+
+main > section,
+.sidebar {
+  scroll-margin-top: 7rem;
+  padding: var(--space-l) var(--space-m);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.about {
+  text-align: center;
+}
+
+.about img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  margin: 0 auto var(--space-m);
+  border-radius: 50%;
+}
+
+.about p {
+  color: var(--color-muted);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.projects {
+  display: grid;
+  gap: var(--space-m);
+}
+
+.project {
+  padding: var(--space-m);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.project p {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-s);
+}
+
+.sidebar ul {
+  padding-left: var(--space-m);
+  margin: 0 0 var(--space-l);
+}
+
+.sidebar li {
+  margin-bottom: var(--space-s);
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  list-style: none;
+}
+
+.sidebar .skills {
+  padding-left: 0;
+}
+
+.skills li {
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  background-color: #dbeafe;
+  color: var(--color-primary-dark);
+  border-radius: 999px;
+}
+
+form {
+  display: grid;
+  gap: var(--space-m);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+label {
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid #9ca3af;
+  border-radius: var(--radius);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.checkbox-row {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.checkbox-row input {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+button {
+  justify-self: start;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  background-color: var(--color-primary-dark);
+}
+
+.site-footer {
+  padding: var(--space-l) var(--space-m);
+  text-align: center;
+  color: #e5e7eb;
+  background-color: var(--color-text);
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+.site-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-m);
+  margin: 0 0 var(--space-m);
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer a {
+  color: #93c5fd;
+}
+
+@media (min-width: 40em) {
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-l);
+    align-items: center;
+    text-align: left;
+  }
+
+  .about img {
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  .about p {
+    margin: 0;
+  }
+
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects h2 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 64em) {
+  main {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "about about"
+      "projects sidebar"
+      "contact sidebar";
+    align-items: start;
+  }
+
+  .about {
+    grid-area: about;
+  }
+
+  .projects {
+    grid-area: projects;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 6rem;
+  }
+
+  .contact {
+    grid-area: contact;
+  }
 }
